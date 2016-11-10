@@ -1,0 +1,10 @@
+- hosts: web
+  #remote_user: '{{ user_name }}'
+  become: true
+  gather_facts: no
+  pre_tasks:
+    - name: 'Install python'
+      raw: apt-get install python-simplejson -y
+  roles:
+    - role: nodejs
+    - role: mongodb

@@ -1,0 +1,14 @@
+- name: Add repository key for mongodb
+  command: apt-key adv --keyserver hkp://keyserver.ubuntu.com:80 --recv EA312927
+- name: Add repository for mongodb
+  shell: echo "deb http://repo.mongodb.org/apt/ubuntu xenial/mongodb-org/3.2 multiverse" | sudo tee /etc/apt/sources.list.d/mongodb-org-3.2.list
+- name: Install MongoDB
+  apt: pkg=mongodb-org state=present update_cache=yes
+- name: Copy mongodb service file
+  copy:
+    src=mongodb.service dest=/etc/systemd/system/mongodb.service owner=root group=root mode=0644
+  notify:
+    - start mongodb
+- name: Reloading systemctl because of warning
+  command: systemctl daemon-reload
+#  service: name=mongodb state=started enabled=yes
