@@ -5,4 +5,4 @@ Usages:
 Setup development environment
 - ansible-playbook -i inventories/development server.yml
 Setup staging environment
-- ansible-playbook -i inventories/staging
+- ansible-playbook -i inventories/staging server.yml
